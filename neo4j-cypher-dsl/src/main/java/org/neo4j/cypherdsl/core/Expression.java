@@ -34,7 +34,7 @@ import org.neo4j.cypherdsl.core.utils.Assertions;
  * @since 1.0
  */
 @API(status = STABLE, since = "1.0")
-public interface Expression extends Visitable {
+public interface Expression extends Visitable, HasProperties {
 
 	/**
 	 * Creates a condition that checks whether this {@code expression} includes all elements of {@code rhs}.
@@ -482,19 +482,34 @@ public interface Expression extends Visitable {
 		return SortItem.create(this, direction);
 	}
 
-	/**
-	 * Assumes that this expressions refers to a container of some type allowing to reference properties from it.
-	 * Note: The expression does not track property creation and there is no possibility to enumerate all properties
-	 * that have been created for it.
-	 *
-	 * @param names At least one non empty name. If multiple names are specified, the expression creates a nested property like {@code this.name1.name2}.
-	 *
-	 * @return a new {@link Property} associated with this expression
-	 * @since 2021.0.0
-	 */
-	@NotNull @Contract(pure = true)
+	@Override @NotNull
 	default Property property(String... names) {
 
 		return InternalPropertyImpl.create(this, names);
+	}
+
+	@Override @NotNull
+	default Property property(@NotNull String name) {
+		return InternalPropertyImpl.create(this, name);
+	}
+
+	/**
+	 * Creates a new {@link Property} associated with this property container. This property can be used as a lookup in
+	 * other expressions. It does not add a value to the property.
+	 * <p>
+	 * The new {@link Property} object is a dynamic lookup, based on the {@code expression} passed to this method. The
+	 * expression can be example another property, a function result or a Cypher parameter. A property defined in such a way will
+	 * render as {@code p[expression]}.
+	 * <p>
+	 * Note: The property container does not track property creation and there is no possibility to enumerate all
+	 * properties that have been created for this property container.
+	 *
+	 * @param lookup the expression that is evaluated to lookup this property.
+	 * @return a new {@link Property} associated with this named container
+	 * @since 2023.9.4
+	 */
+	@Override @NotNull
+	default Property property(@NotNull Expression lookup) {
+		return InternalPropertyImpl.create(this, lookup);
 	}
 }
