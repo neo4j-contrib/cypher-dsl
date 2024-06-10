@@ -48,7 +48,7 @@ abstract class AbstractPropertyContainer implements PropertyContainer {
 
 	@NotNull
 	@Override
-	public final Property property(Expression lookup) {
+	public final Property property(@NotNull Expression lookup) {
 		return InternalPropertyImpl.create(this, lookup);
 	}
 

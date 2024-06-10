@@ -35,46 +35,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 1.1
  */
 @API(status = STABLE, since = "1.1")
-public interface PropertyContainer extends Named {
-
-	/**
-	 * Creates a new {@link Property} associated with this property container. This property can be used as a lookup in
-	 * other expressions. It does not add a value to the property.
-	 * <p>
-	 * Note: The property container does not track property creation and there is no possibility to enumerate all
-	 * properties that have been created for this property container.
-	 *
-	 * @param name property name, must not be {@literal null} or empty.
-	 * @return a new {@link Property} associated with this named container
-	 */
-	@NotNull @Contract(pure = true)
-	Property property(@NotNull String name);
-
-	/**
-	 * @param names a list of nested property names
-	 * @return a new {@link Property} associated with this named container
-	 * @see  #property(String)
-	 */
-	@NotNull @Contract(pure = true)
-	Property property(String... names);
-
-	/**
-	 * Creates a new {@link Property} associated with this property container. This property can be used as a lookup in
-	 * other expressions. It does not add a value to the property.
-	 * <p>
-	 * The new {@link Property} object is a dynamic lookup, based on the {@code expression} passed to this method. The
-	 * expression can be example another property, a function result or a Cypher parameter. A property defined in such a way will
-	 * render as {@code p[expression]}.
-	 * <p>
-	 * Note: The property container does not track property creation and there is no possibility to enumerate all
-	 * properties that have been created for this property container.
-	 *
-	 * @param lookup the expression that is evaluated to lookup this property.
-	 * @return a new {@link Property} associated with this named container
-	 * @since 2021.0.0
-	 */
-	@NotNull @Contract(pure = true)
-	Property property(Expression lookup);
+public interface PropertyContainer extends Named, HasProperties {
 
 	/**
 	 * Creates an {@link Operation} mutating the properties of this container to a new value. The container does not
