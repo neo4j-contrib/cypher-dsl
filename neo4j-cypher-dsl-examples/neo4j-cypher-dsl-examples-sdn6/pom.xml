@@ -44,7 +44,7 @@
 		<license-maven-plugin.version>4.5</license-maven-plugin.version>
 		<maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
 		<sortpom-maven-plugin.version>4.0.0</sortpom-maven-plugin.version>
-		<testcontainers.version>1.20.0</testcontainers.version>
+		<testcontainers.version>1.20.1</testcontainers.version>
 	</properties>
 
 	<dependencyManagement>
