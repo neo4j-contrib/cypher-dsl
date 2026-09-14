@@ -194,7 +194,7 @@
 		<quarkus.platform.version>3.39.2</quarkus.platform.version>
 		<querydsl.version>5.1.0</querydsl.version>
 		<slf4j.version>2.0.17</slf4j.version>
-		<sonar-maven-plugin.version>5.7.0.6970</sonar-maven-plugin.version>
+		<sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
 		<sortpom-maven-plugin.version>4.0.0</sortpom-maven-plugin.version>
 		<spring-boot.version>4.1.1</spring-boot.version>
 		<spring-data-neo4j.version>8.1.1</spring-data-neo4j.version>
